@@ -35,44 +35,94 @@ bool HelloWorld::init()
 //    oneSprite->setAnchorPoint(Point(0,0));
 //    addChild(oneSprite);
     
-    log("hello world");
+//    log("hello world");
+//    
+////    MessageBox("内容", "标题");
+//    
+//    Size onesize = Director::getInstance()->getVisibleSize();
+//    
+//    Label *onelabel = Label::create();
+//    onelabel->setString("123123");
+//    onelabel->setTextColor(Color4B::WHITE);
+//    onelabel->setPosition(onesize.width/2, onesize.height/2);
+//    addChild(onelabel);
+//    
+//    TextFieldTTF *onetextField = TextFieldTTF::textFieldWithPlaceHolder("在这输入", "宋体", 13.0);
+//    onetextField->setPosition(onesize.width/2, onesize.height/2 + 60);
+//    addChild(onetextField);
+//    
+//    auto listener = EventListenerTouchOneByOne::create();
+//    listener->onTouchBegan = [onetextField](Touch *touch, Event *event){
+//        if (onetextField->getBoundingBox().containsPoint(touch->getLocation()))
+//        {
+//            onetextField->attachWithIME();
+//        }
+//        else
+//        {
+//            onetextField->detachWithIME();
+//        }
+//        return false;
+//    };
+//    
+//    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, onetextField);
+//    
+//    auto oneHuman = Human::create();
+//    oneHuman->setAnchorPoint(Point(0,0));
+//    addChild(oneHuman);
     
-    MessageBox("内容", "标题");
+    //http://api.cocos.com/d3/d5c/classcocos2d_1_1_sprite.html
     
-    Size onesize = Director::getInstance()->getVisibleSize();
+//    auto onemenuImage = MenuItemImage::create("favImage.png", "favImageSelected.png", [](Ref *ref){
+//        log("onemenuImage clicked");
+//    });
     
-    Label *onelabel = Label::create();
-    onelabel->setString("123123");
-    onelabel->setTextColor(Color4B::WHITE);
-    onelabel->setPosition(onesize.width/2, onesize.height/2);
-    addChild(onelabel);
+//    auto onemenu = Menu::create(onemenuImage, NULL);
+//    addChild(onemenu);
     
-    TextFieldTTF *onetextField = TextFieldTTF::textFieldWithPlaceHolder("在这输入", "宋体", 13.0);
-    onetextField->setPosition(onesize.width/2, onesize.height/2 + 60);
-    addChild(onetextField);
-    
-    auto listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [onetextField](Touch *touch, Event *event){
-        if (onetextField->getBoundingBox().containsPoint(touch->getLocation()))
-        {
-            onetextField->attachWithIME();
-        }
-        else
-        {
-            onetextField->detachWithIME();
-        }
-        return false;
-    };
-    
-    Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, onetextField);
-    
-    auto oneHuman = Human::create();
-    oneHuman->setAnchorPoint(Point(0,0));
-    addChild(oneHuman);
-    
-    //Cocos2d-x之内存管理机制
+    TableView *tableview = TableView::create(this, Size(300, 100));
+    tableview->setAnchorPoint(Point(0,0));
+    tableview->setPosition(100, 100);
+    tableview->setDelegate(this);
+    addChild(tableview);
     
     return true;
+}
+
+
+Size HelloWorld::cellSizeForTable(cocos2d::extension::TableView *table)
+{
+    return Size(300, 50);
+}
+
+
+TableViewCell* HelloWorld::tableCellAtIndex(cocos2d::extension::TableView *table, ssize_t idx)
+{
+    TableViewCell *cell = table->dequeueCell();
+    if (cell == NULL)
+    {
+        cell = TableViewCell::create();
+        Label *onelabel = Label::create();
+        onelabel->setTag(20);
+        onelabel->setSystemFontSize(20.0);
+        onelabel->setAnchorPoint(Point(0,0));
+        onelabel->setTextColor(Color4B::WHITE);
+        cell->addChild(onelabel);
+    }
+    Label *label = (Label *)cell->getChildByTag(20);
+    label->setString(StringUtils::format("label %ld",idx));
+    return cell;
+}
+
+
+ssize_t HelloWorld::numberOfCellsInTableView(cocos2d::extension::TableView *table)
+{
+    return 20;
+}
+
+void HelloWorld::tableCellTouched(cocos2d::extension::TableView *table, cocos2d::extension::TableViewCell *cell)
+{
+    Label *onelabel = (Label *)cell->getChildByTag(20);
+    log("%s",onelabel->getString().c_str());
 }
 
 
