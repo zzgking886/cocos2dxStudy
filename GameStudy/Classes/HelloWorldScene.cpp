@@ -1,23 +1,25 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "Human.hpp"
+#include "FirstScene.hpp"
+
 
 USING_NS_CC;
+
+#define RATIO ((Director::getInstance()->getVisibleSize().height) / 5)
 
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
-    
     // 'layer' is an autorelease object
     auto layer = HelloWorld::create();
-
     // add layer as a child to scene
     scene->addChild(layer);
-
     // return the scene
     return scene;
 }
+
 
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
@@ -79,13 +81,128 @@ bool HelloWorld::init()
 //    auto onemenu = Menu::create(onemenuImage, NULL);
 //    addChild(onemenu);
     
-    TableView *tableview = TableView::create(this, Size(300, 100));
-    tableview->setAnchorPoint(Point(0,0));
-    tableview->setPosition(100, 100);
-    tableview->setDelegate(this);
-    addChild(tableview);
+//    TableView *tableview = TableView::create(this, Size(300, 100));
+//    tableview->setAnchorPoint(Point(0,0));
+//    tableview->setPosition(100, 100);
+//    tableview->setDelegate(this);
+//    addChild(tableview);
+    
+//    Size size = Director::getInstance()->getVisibleSize();
+//    log("width = %f",size.width);
+//    log("height = %f",size.height);
+//    Label *onelabel = Label::createWithSystemFont("show next scene", "Courier", 36);
+//    onelabel->setDimensions(size.width, 30);
+//    log("label height = %f", onelabel->getHeight());
+//    onelabel->setPosition(0, onelabel->getHeight());
+//    onelabel->setAnchorPoint(Point(0,0));
+//    onelabel->setColor(Color3B::RED);
+//    addChild(onelabel);
+    
+//    Size onesize = Director::getInstance()->getVisibleSize();
+//    Sprite *onesprite = Sprite::create("test_bg_2.jpg");
+//    onesprite->setPosition(onesize.width/2, onesize.height/2);
+//    addChild(onesprite);
+//    
+//    this->scheduleOnce(CC_SCHEDULE_SELECTOR(HelloWorld::delayCall), 2.0f);
+    
+    
+    
+//    auto cache = SpriteFrameCache::getInstance();
+//    cache->addSpriteFramesWithFile("anim.plist");
+//    Vector<SpriteFrame *> oneVec;
+//    
+//    char strAnim[15];
+//    
+//    for (int i = 0; i < 20; i++)
+//    {
+//        sprintf(strAnim, "anim%04d",i);
+//        oneVec.pushBack(cache->getSpriteFrameByName(strAnim));
+//    }
+//    
+//    Animation *animation = Animation::createWithSpriteFrames(oneVec, 0.1);
+//    Animate *animate = Animate::create(animation);
+//    
+//    auto oneSprite = Sprite::create();
+//    oneSprite->setTextureRect(Rect(0, 0, 80, 80));
+//    oneSprite->setPosition(0, 0);
+//    oneSprite->setAnchorPoint(Point(0, 0));
+//    addChild(oneSprite);
+//    oneSprite->runAction(RepeatForever::create(animate));
+    
+    world = new b2World(b2Vec2(0,-10));
+    
+    addGround();
+    addRect();
+    scheduleUpdate();
     
     return true;
+}
+
+void HelloWorld::update(float dt)
+{
+    Size onesize = Director::getInstance()->getVisibleSize();
+    world->Step(dt, 8, 3);
+    Sprite *onesprite;
+    for (b2Body *b = world->GetBodyList(); b; b=b->GetNext())
+    {
+        if (b->GetType() == b2_dynamicBody)
+        {
+            if (b->GetUserData())
+            {
+                onesprite = (Sprite *)b->GetUserData();
+                onesprite->setPosition(Point(onesize.width / 2, b->GetPosition().y * RATIO));
+            }
+        }
+    }
+}
+
+void HelloWorld::addRect()
+{
+    Size onesize = Director::getInstance()->getWinSize();
+    b2BodyDef def;
+    def.position = b2Vec2(0, 5);
+    def.type = b2_dynamicBody;
+    b2Body *body = world->CreateBody(&def);
+    
+    b2PolygonShape groundshape;
+    groundshape.SetAsBox(0.5, 0.5);
+    
+    b2FixtureDef fixturedef;
+    fixturedef.density = 1;
+    fixturedef.friction = 0.3;
+    fixturedef.shape = &groundshape;
+    body->CreateFixture(&fixturedef);
+    
+    auto onesprite = Sprite::create();
+    onesprite->setTextureRect(Rect(0, 0, 0.5*2*RATIO, 0.5*2*RATIO));
+    onesprite->setAnchorPoint(Point(0, 0));
+    addChild(onesprite);
+//    onesprite->setPosition(Point(onesize.width / 2, onesize.height-80));
+    body->SetUserData(onesprite);
+}
+
+
+void HelloWorld::addGround()
+{
+    b2BodyDef def;
+    def.position = b2Vec2(Director::getInstance()->getWinSize().width / RATIO, 0);
+    def.type = b2_staticBody;
+    b2Body *body = world->CreateBody(&def);
+    
+    b2PolygonShape groundshape;
+    groundshape.SetAsBox(Director::getInstance()->getWinSize().width / RATIO, 0.5);
+    
+    b2FixtureDef fixturedef;
+    fixturedef.density = 1;
+    fixturedef.friction = 0.3;
+    fixturedef.shape = &groundshape;
+    body->CreateFixture(&fixturedef);
+}
+
+
+void HelloWorld::delayCall(float f)
+{
+    Director::getInstance()->replaceScene(TransitionFadeBL::create(1.0, FirstScene::createScene()));
 }
 
 

@@ -3,12 +3,16 @@
 
 #include "cocos2d.h"
 #include <cocos-ext.h>
+#include <Box2D/Box2D.h>
 
 USING_NS_CC_EXT;
 USING_NS_CC;
 
 class HelloWorld : public cocos2d::Layer,TableViewDataSource,TableViewDelegate
 {
+    
+private:
+    b2World *world;
 public:
     static cocos2d::Scene* createScene();
 
@@ -19,6 +23,8 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+    
+    void delayCall(float f);
 public:
     /**
      * cell height for a given table.
@@ -43,6 +49,9 @@ public:
     
     virtual void tableCellTouched(TableView* table, TableViewCell* cell);
     
+    virtual void update(float dt);
+    void addRect();
+    void addGround();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

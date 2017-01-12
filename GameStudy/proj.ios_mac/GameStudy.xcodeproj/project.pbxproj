@@ -10,10 +10,13 @@
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		220BD4281E1DF4BB0044AEAD /* anim.plist in Resources */ = {isa = PBXBuildFile; fileRef = 220BD4261E1DF4BB0044AEAD /* anim.plist */; };
+		220BD4291E1DF4BB0044AEAD /* anim.png in Resources */ = {isa = PBXBuildFile; fileRef = 220BD4271E1DF4BB0044AEAD /* anim.png */; };
 		22426C021DD1C6D300270B7C /* test_bg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 22426BFF1DD1C6D300270B7C /* test_bg_1.jpg */; };
 		22426C031DD1C6D300270B7C /* test_bg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 22426C001DD1C6D300270B7C /* test_bg_2.jpg */; };
 		22426C041DD1C6D300270B7C /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 22426C011DD1C6D300270B7C /* testImage.png */; };
 		22426C0A1DD1DC5400270B7C /* Human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22426C081DD1DC5400270B7C /* Human.cpp */; };
+		22A6E9301E0BB61600167EFA /* FirstScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A6E92E1E0BB61600167EFA /* FirstScene.cpp */; };
 		22E1CAB61DD2FF9300629BD1 /* favImageSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 22E1CAB41DD2FF9300629BD1 /* favImageSelected.png */; };
 		22E1CAB71DD2FF9300629BD1 /* favImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 22E1CAB51DD2FF9300629BD1 /* favImage.png */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -94,11 +97,15 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* GameStudy-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GameStudy-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		220BD4261E1DF4BB0044AEAD /* anim.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = anim.plist; sourceTree = "<group>"; };
+		220BD4271E1DF4BB0044AEAD /* anim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = anim.png; sourceTree = "<group>"; };
 		22426BFF1DD1C6D300270B7C /* test_bg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_bg_1.jpg; sourceTree = "<group>"; };
 		22426C001DD1C6D300270B7C /* test_bg_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test_bg_2.jpg; sourceTree = "<group>"; };
 		22426C011DD1C6D300270B7C /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImage.png; sourceTree = "<group>"; };
 		22426C081DD1DC5400270B7C /* Human.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Human.cpp; sourceTree = "<group>"; };
 		22426C091DD1DC5400270B7C /* Human.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Human.hpp; sourceTree = "<group>"; };
+		22A6E92E1E0BB61600167EFA /* FirstScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FirstScene.cpp; sourceTree = "<group>"; };
+		22A6E92F1E0BB61600167EFA /* FirstScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FirstScene.hpp; sourceTree = "<group>"; };
 		22E1CAB41DD2FF9300629BD1 /* favImageSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favImageSelected.png; sourceTree = "<group>"; };
 		22E1CAB51DD2FF9300629BD1 /* favImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favImage.png; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -215,6 +222,8 @@
 		22426BFE1DD1C6D300270B7C /* img */ = {
 			isa = PBXGroup;
 			children = (
+				220BD4261E1DF4BB0044AEAD /* anim.plist */,
+				220BD4271E1DF4BB0044AEAD /* anim.png */,
 				22E1CAB41DD2FF9300629BD1 /* favImageSelected.png */,
 				22E1CAB51DD2FF9300629BD1 /* favImage.png */,
 				22426BFF1DD1C6D300270B7C /* test_bg_1.jpg */,
@@ -287,6 +296,8 @@
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				22426C081DD1DC5400270B7C /* Human.cpp */,
 				22426C091DD1DC5400270B7C /* Human.hpp */,
+				22A6E92E1E0BB61600167EFA /* FirstScene.cpp */,
+				22A6E92F1E0BB61600167EFA /* FirstScene.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -425,8 +436,10 @@
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				220BD4281E1DF4BB0044AEAD /* anim.plist in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				22426C021DD1C6D300270B7C /* test_bg_1.jpg in Resources */,
+				220BD4291E1DF4BB0044AEAD /* anim.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
@@ -445,6 +458,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				22A6E9301E0BB61600167EFA /* FirstScene.cpp in Sources */,
 				22426C0A1DD1DC5400270B7C /* Human.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
